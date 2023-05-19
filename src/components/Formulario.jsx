@@ -1,10 +1,28 @@
+import { useState } from "react";
 import useClima from "../hooks/useClima"
 const Formulario = () => {
-  const {handleChangeBusqueda} = useClima()
+  const [alerta, setAlerta] = useState('')
+  const {handleChangeBusqueda, busqueda, consultarClima} = useClima()
+  const {ciudad,pais} = busqueda;
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    if(Object.values(busqueda).includes('')){
+        setAlerta('Todos los campos son obligatorios')
+        return
+    }
+
+    consultarClima(busqueda)
+
+
+  }
+
 
   return (
     <div className='contenedor'>
-        <form>
+        {alerta && <p>{alerta}</p> }
+        <form onSubmit={handleSubmit}>
             <div className="campo">
                 <label htmlFor="ciudad">Ciudad</label>
                 <input 
@@ -12,6 +30,7 @@ const Formulario = () => {
                     name="ciudad" 
                     id="ciudad" 
                     placeholder='Escribe tu ciudad'
+                    value={ciudad}
                     onChange={e => handleChangeBusqueda(e)}
                 />
             </div>
@@ -20,6 +39,7 @@ const Formulario = () => {
                 <select 
                     name="pais" 
                     id="pais"
+                    value={pais}
                     onChange={e => handleChangeBusqueda(e)}
                 >
                     <option value="">Seleccione un pais</option>

@@ -12,10 +12,17 @@ const ClimaProvider = ({children}) => {
         setBusqueda({...busqueda, [e.target.name]:e.target.value})
     }
 
+    const consultarClima = datos => {
+        console.log(datos)
+    }
+
+    
     return (
         <ClimaContext.Provider
             value={{    
-                handleChangeBusqueda
+                handleChangeBusqueda,
+                busqueda,
+                consultarClima
             }}
         >
             {children}
