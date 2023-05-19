@@ -1,6 +1,7 @@
-import React from 'react'
-
+import useClima from "../hooks/useClima"
 const Formulario = () => {
+  const {handleChangeBusqueda} = useClima()
+
   return (
     <div className='contenedor'>
         <form>
@@ -11,11 +12,16 @@ const Formulario = () => {
                     name="ciudad" 
                     id="ciudad" 
                     placeholder='Escribe tu ciudad'
+                    onChange={e => handleChangeBusqueda(e)}
                 />
             </div>
             <div className="campo">
                 <label htmlFor="pais">Pais</label>
-                <select name="ciudad" id="ciudad">
+                <select 
+                    name="pais" 
+                    id="pais"
+                    onChange={e => handleChangeBusqueda(e)}
+                >
                     <option value="">Seleccione un pais</option>
                     <option value="MX">Mexico</option>
                     <option value="EU">Estados Unidos</option>
